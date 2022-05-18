@@ -49,36 +49,20 @@ public class FXMLController {
     	
     	try {
     		x = Integer.parseInt(compagnieMinimo.getText());
-    	} catch (NumberFormatException e) {
+    	} catch(NumberFormatException e) {
     		txtResult.appendText("Inserire valore numerico");
     		return;
     	}
-    	
     	this.model.creaGrafo(x);
-    	
-    	txtResult.appendText("# VERTICI: " + this.model.nVertici() + "\n");
-    	txtResult.appendText("# ARCHI: " + this.model.nArchi());
-    	
     	cmbBoxAeroportoPartenza.getItems().addAll(this.model.getVertici());
     	cmbBoxAeroportoDestinazione.getItems().addAll(this.model.getVertici());
+    	
     }
 
     @FXML
     void doTestConnessione(ActionEvent event) {
-    	txtResult.clear();
-    	if(cmbBoxAeroportoPartenza.getValue() == null ||
-    			cmbBoxAeroportoDestinazione.getValue() == null) {
-    		txtResult.appendText("Seleziona i due aeroporti!");
-    		return ;
-    	}
-    	
     	List<Airport> percorso = this.model.getPercorso(cmbBoxAeroportoPartenza.getValue(), cmbBoxAeroportoDestinazione.getValue());
-    	
-    	if(percorso == null) {
-    		txtResult.appendText("I due aeroporti non sono collegati");
-    	} else {
-    		txtResult.appendText(percorso.toString());
-    	}
+    	System.out.println(percorso);
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
